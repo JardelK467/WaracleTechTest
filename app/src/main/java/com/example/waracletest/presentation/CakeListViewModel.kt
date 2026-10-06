@@ -15,6 +15,10 @@ class CakeListViewModel(
     private val _uiState = MutableStateFlow<CakeListUiState>(CakeListUiState.Loading)
     val uiState: StateFlow<CakeListUiState> = _uiState.asStateFlow()
 
+    init {
+        loadCakes()
+    }
+
     fun loadCakes() {
         viewModelScope.launch {
             _uiState.value = CakeListUiState.Loading
@@ -23,7 +27,7 @@ class CakeListViewModel(
                 CakeListUiState.Success(getCakes())
             } catch (exception: CancellationException) {
                 throw exception
-            } catch (exception: Exception) {
+            } catch (_: Exception) {
                 CakeListUiState.Error(message = "Unable to load cakes.")
             }
         }
