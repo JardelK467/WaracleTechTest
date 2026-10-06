@@ -7,7 +7,8 @@ class GetCakesUseCase(
     private val cakeRepository: CakeRepository,
 ) {
     suspend operator fun invoke(): List<Cake> {
-        // TODO: Remove duplicate cakes and sort by title when the data flow is implemented.
         return cakeRepository.getCakes()
+            .distinctBy(Cake::title)
+            .sortedBy(Cake::title)
     }
 }
