@@ -47,6 +47,8 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.lifecycle.runtime.compose)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network.okhttp)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.retrofit)
     implementation(libs.retrofit.kotlinx.serialization)

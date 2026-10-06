@@ -6,14 +6,14 @@ import retrofit2.Retrofit
 import retrofit2.converter.kotlinx.serialization.asConverterFactory
 
 object CakeServiceFactory {
-    private const val defaultBaseUrl =
+    private const val BASE_URL =
         "https://raw.githubusercontent.com/Waracle/mobile-coding-test-api/refs/heads/main/"
 
     private val json = Json {
         ignoreUnknownKeys = true
     }
 
-    fun create(baseUrl: String = defaultBaseUrl): CakeService {
+    fun create(baseUrl: String = BASE_URL): CakeService {
         // TODO: Externalise the base URL through build configuration if multiple environments are added.
         val retrofit = Retrofit.Builder()
             .baseUrl(baseUrl)

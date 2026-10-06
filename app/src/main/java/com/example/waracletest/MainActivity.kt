@@ -18,7 +18,7 @@ import com.example.waracletest.ui.theme.WaracletestTheme
 class MainActivity : ComponentActivity() {
     private val cakeListViewModel: CakeListViewModel by viewModels {
         CakeListViewModelFactory(
-            getCakes = GetCakesUseCase(
+            cakesUseCase = GetCakesUseCase(
                 cakeRepository = CakeRepositoryImpl(
                     cakeService = CakeServiceFactory.create(),
                 ),
