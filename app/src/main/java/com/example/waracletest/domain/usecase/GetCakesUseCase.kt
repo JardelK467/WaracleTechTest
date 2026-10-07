@@ -6,9 +6,9 @@ import com.example.waracletest.domain.repository.CakeRepository
 class GetCakesUseCase(
     private val cakeRepository: CakeRepository,
 ) {
-    suspend operator fun invoke(): List<Cake> {
-        return cakeRepository.getCakes()
+    suspend operator fun invoke(): List<Cake> =
+        cakeRepository
+            .getCakes()
             .distinctBy(Cake::title)
-            .sortedBy(Cake::title)
-    }
+            .sortedBy { it.title.lowercase() }
 }
