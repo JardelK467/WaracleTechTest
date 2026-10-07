@@ -84,9 +84,10 @@ fun CakeListContent(
         PullToRefreshBox(
             isRefreshing = isRefreshing,
             onRefresh = onRefresh,
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(top = innerPadding.calculateTopPadding()),
+            modifier =
+                Modifier
+                    .fillMaxSize()
+                    .padding(top = innerPadding.calculateTopPadding()),
         ) {
             AnimatedContent(
                 targetState = uiState,
@@ -94,16 +95,23 @@ fun CakeListContent(
                 modifier = Modifier.fillMaxSize(),
             ) { state ->
                 when (state) {
-                    CakeListUiState.Loading -> CakeLoadingContent()
-                    is CakeListUiState.Error -> CakeErrorContent(
-                        message = state.message,
-                        onRetry = onRefresh,
-                    )
+                    CakeListUiState.Loading -> {
+                        CakeLoadingContent()
+                    }
 
-                    is CakeListUiState.Success -> CakeSuccessContent(
-                        cakes = state.cakes,
-                        bottomInset = innerPadding.calculateBottomPadding(),
-                    )
+                    is CakeListUiState.Error -> {
+                        CakeErrorContent(
+                            message = state.message,
+                            onRetry = onRefresh,
+                        )
+                    }
+
+                    is CakeListUiState.Success -> {
+                        CakeSuccessContent(
+                            cakes = state.cakes,
+                            bottomInset = innerPadding.calculateBottomPadding(),
+                        )
+                    }
                 }
             }
         }
@@ -142,9 +150,10 @@ private fun CakeErrorContent(
     onRetry: () -> Unit,
 ) {
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(24.dp),
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .padding(24.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {
@@ -190,9 +199,10 @@ private fun CakeSuccessContent(
             cakes = cakes,
             bottomInset = bottomInset,
             onCakeSelected = { cake -> selectedTitle = cake.title },
-            modifier = Modifier
-                .widthIn(max = ContentMaxWidth)
-                .fillMaxHeight(),
+            modifier =
+                Modifier
+                    .widthIn(max = ContentMaxWidth)
+                    .fillMaxHeight(),
         )
     }
 
@@ -215,12 +225,13 @@ private fun CakeList(
 
     LazyColumn(
         modifier = modifier,
-        contentPadding = PaddingValues(
-            start = 16.dp,
-            top = 16.dp,
-            end = 16.dp,
-            bottom = 16.dp + bottomInset,
-        ),
+        contentPadding =
+            PaddingValues(
+                start = 16.dp,
+                top = 16.dp,
+                end = 16.dp,
+                bottom = 16.dp + bottomInset,
+            ),
     ) {
         itemsIndexed(
             items = cakes,
@@ -266,10 +277,11 @@ private fun FallDownFadeIn(
     }
 
     Box(
-        modifier = Modifier.graphicsLayer {
-            alpha = progress.value
-            translationY = -ItemFallDistance.toPx() * (1f - progress.value)
-        },
+        modifier =
+            Modifier.graphicsLayer {
+                alpha = progress.value
+                translationY = -ItemFallDistance.toPx() * (1f - progress.value)
+            },
     ) {
         content()
     }
@@ -328,9 +340,10 @@ private fun CakeImage(
     modifier: Modifier = Modifier,
 ) {
     Box(
-        modifier = modifier
-            .clip(RoundedCornerShape(16.dp))
-            .background(MaterialTheme.colorScheme.surfaceVariant),
+        modifier =
+            modifier
+                .clip(RoundedCornerShape(16.dp))
+                .background(MaterialTheme.colorScheme.surfaceVariant),
         contentAlignment = Alignment.Center,
     ) {
         // Placeholder initial, visible until the image loads.
@@ -340,10 +353,12 @@ private fun CakeImage(
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
         AsyncImage(
-            model = ImageRequest.Builder(LocalContext.current)
-                .data(cake.imageUrl)
-                .crossfade(true)
-                .build(),
+            model =
+                ImageRequest
+                    .Builder(LocalContext.current)
+                    .data(cake.imageUrl)
+                    .crossfade(true)
+                    .build(),
             contentDescription = "Image of ${cake.title}",
             contentScale = ContentScale.Crop,
             modifier = Modifier.fillMaxSize(),

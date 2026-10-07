@@ -3,9 +3,9 @@ package com.example.waracletest.presentation
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.waracletest.domain.model.Cake
 import com.example.waracletest.ui.theme.WaracletestTheme
 
@@ -36,38 +36,39 @@ fun CakeListScreen(
         uiState = uiState,
         isRefreshing = isRefreshing,
         onRefresh = onRefresh,
-        modifier = modifier
+        modifier = modifier,
     )
 }
 
 object CakeListPreviewData {
-    val cakes = listOf(
-        Cake(
-            title = "Dundee Cake",
-            description = "A staple with Dundonians",
-            imageUrl = "https://example.com/dundee.jpg",
-        ),
-        Cake(
-            title = "Cheesecake",
-            description = "A classic Italian dessert",
-            imageUrl = "https://example.com/cheesecake.jpg",
-        ),
-        Cake(
-            title = "Tiramisu",
-            description = "A popular Italian dessert",
-            imageUrl = "https://example.com/tiramisu.jpg",
-        ),
-        Cake(
-            title = "Apple Pie",
-            description = "A popular American dessert",
-            imageUrl = "https://example.com/applepie.jpg",
-        ),
-        Cake(
-            title = "Carrot Cake",
-            description = "A popular American dessert",
-            imageUrl = "https://example.com/carrotcake.jpg",
-        ),
-    )
+    val cakes =
+        listOf(
+            Cake(
+                title = "Dundee Cake",
+                description = "A staple with Dundonians",
+                imageUrl = "https://example.com/dundee.jpg",
+            ),
+            Cake(
+                title = "Cheesecake",
+                description = "A classic Italian dessert",
+                imageUrl = "https://example.com/cheesecake.jpg",
+            ),
+            Cake(
+                title = "Tiramisu",
+                description = "A popular Italian dessert",
+                imageUrl = "https://example.com/tiramisu.jpg",
+            ),
+            Cake(
+                title = "Apple Pie",
+                description = "A popular American dessert",
+                imageUrl = "https://example.com/applepie.jpg",
+            ),
+            Cake(
+                title = "Carrot Cake",
+                description = "A popular American dessert",
+                imageUrl = "https://example.com/carrotcake.jpg",
+            ),
+        )
 }
 
 @Preview(name = "Phone", showBackground = true, widthDp = 360, heightDp = 800)
