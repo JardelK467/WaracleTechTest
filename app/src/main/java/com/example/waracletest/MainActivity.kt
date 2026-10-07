@@ -7,8 +7,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.ui.Modifier
-import com.example.waracletest.data.repository.CakeRepositoryImpl
 import com.example.waracletest.data.remote.CakeServiceFactory
+import com.example.waracletest.data.repository.CakeRepositoryImpl
 import com.example.waracletest.domain.usecase.GetCakesUseCase
 import com.example.waracletest.presentation.CakeListScreenRoot
 import com.example.waracletest.presentation.CakeListViewModel
@@ -16,13 +16,16 @@ import com.example.waracletest.presentation.CakeListViewModelFactory
 import com.example.waracletest.ui.theme.WaracletestTheme
 
 class MainActivity : ComponentActivity() {
+    // TODO: Replace this manual wiring with Hilt or Koin once the app has more than one screen
     private val cakeListViewModel: CakeListViewModel by viewModels {
         CakeListViewModelFactory(
-            cakesUseCase = GetCakesUseCase(
-                cakeRepository = CakeRepositoryImpl(
-                    cakeService = CakeServiceFactory.create(),
+            cakesUseCase =
+                GetCakesUseCase(
+                    cakeRepository =
+                        CakeRepositoryImpl(
+                            cakeService = CakeServiceFactory.create(),
+                        ),
                 ),
-            ),
         )
     }
 

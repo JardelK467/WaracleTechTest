@@ -10,6 +10,9 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
+// TODO: If the screen gains actions such as add or delete, replace this sealed
+//  interface with a single UiState data class so loading, refreshing and
+//  pending actions can be tracked together.
 sealed interface CakeListUiState {
     data object Loading : CakeListUiState
 
@@ -34,6 +37,7 @@ class CakeListViewModel(
     init {
         loadCakes()
     }
+
     private fun loadCakes() {
         viewModelScope.launch {
             _uiState.value = CakeListUiState.Loading
