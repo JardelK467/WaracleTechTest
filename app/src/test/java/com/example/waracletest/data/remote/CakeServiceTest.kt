@@ -23,33 +23,34 @@ class CakeServiceTest {
     }
 
     @Test
-    fun `loadCakes requests cakes endpoint and deserializes response`() = runBlocking {
-        server.enqueue(
-            MockResponse()
-                .setHeader("Content-Type", "application/json")
-                .setBody(
-                    """
-                    [
-                      {
-                        "title": "Dundee Cake",
-                        "desc": "A staple with Dundonians",
-                        "image": "https://example.com/dundee.jpg"
-                      }
-                    ]
-                    """.trimIndent(),
+    fun `loadCakes requests cakes endpoint and deserializes response`() =
+        runBlocking {
+            server.enqueue(
+                MockResponse()
+                    .setHeader("Content-Type", "application/json")
+                    .setBody(
+                        """
+                        [
+                          {
+                            "title": "Dundee Cake",
+                            "desc": "A staple with Dundonians",
+                            "image": "https://example.com/dundee.jpg"
+                          }
+                        ]
+                        """.trimIndent(),
+                    ),
+            )
+
+            val cakes = CakeServiceFactory.create(server.url("/").toString()).loadCakes()
+
+            assertEquals("/cakes", server.takeRequest().path)
+            assertEquals(
+                CakeDto(
+                    title = "Dundee Cake",
+                    desc = "A staple with Dundonians",
+                    image = "https://example.com/dundee.jpg",
                 ),
-        )
-
-        val cakes = CakeServiceFactory.create(server.url("/").toString()).loadCakes()
-
-        assertEquals("/cakes", server.takeRequest().path)
-        assertEquals(
-            CakeDto(
-                title = "Dundee Cake",
-                desc = "A staple with Dundonians",
-                image = "https://example.com/dundee.jpg",
-            ),
-            cakes.single(),
-        )
-    }
+                cakes.single(),
+            )
+        }
 }

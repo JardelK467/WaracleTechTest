@@ -19,9 +19,10 @@ class CakeListViewModelTest {
 
     @Test
     fun `when load succeeds cakes are presented without duplicates and sorted`() {
-        val repository = FakeCakeRepository {
-            listOf(banana, apple, banana.copy(description = "A duplicate title"))
-        }
+        val repository =
+            FakeCakeRepository {
+                listOf(banana, apple, banana.copy(description = "A duplicate title"))
+            }
 
         val viewModel = viewModelWith(repository)
 
@@ -73,14 +74,14 @@ class CakeListViewModelTest {
         assertEquals(2, repository.callCount)
     }
 
-    private fun viewModelWith(repository: CakeRepository) =
-        CakeListViewModel(GetCakesUseCase(repository))
+    private fun viewModelWith(repository: CakeRepository) = CakeListViewModel(GetCakesUseCase(repository))
 
-    private fun cake(title: String) = Cake(
-        title = title,
-        description = "Description for $title",
-        imageUrl = "https://example.com/${title.lowercase().replace(" ", "-")}.jpg",
-    )
+    private fun cake(title: String) =
+        Cake(
+            title = title,
+            description = "Description for $title",
+            imageUrl = "https://example.com/${title.lowercase().replace(" ", "-")}.jpg",
+        )
 }
 
 private class FakeCakeRepository(
